@@ -1,0 +1,141 @@
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>OBS Clock</title>
+
+		<link rel="stylesheet" href="css/animate.css?v=0.3" />
+		
+		<link rel="stylesheet" href="fonts/fonts.css?v=0.3" />
+
+		<style>
+			.animate__animated.animate__flash {
+			  --animate-duration: 1.3s;
+			}
+			.timebox{
+			    text-align: center;
+			    vertical-align:middle;
+			}
+			body{
+			    text-align:center;
+			}
+		</style>
+
+		<style>
+			div{display:inline;margin:0 0 0 0;}
+		</style>
+		
+		<link rel="preconnect" href="https://fonts.proxy.ustclug.org">
+		<link rel="preconnect" href="https://fonts-gstatic.proxy.ustclug.org" crossorigin>
+		<link href="https://fonts.proxy.ustclug.org/css2?family=Bangers&family=Faster+One&family=Galada&family=Oxanium:wght@200;300;400;500;600;700;800&family=Train+One&display=swap" rel="stylesheet">
+		<link href="https://fonts.proxy.ustclug.org/css2?family=Qahiri&display=swap" rel="stylesheet">
+		<link href="https://fonts.proxy.ustclug.org/css2?family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
+		<link href="https://fonts.proxy.ustclug.org/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+		<link href="https://fonts.proxy.ustclug.org/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+		<link href="https://fonts.proxy.ustclug.org/css2?family=Qahiri&display=swap" rel="stylesheet">
+		
+	</head>
+
+	<body>
+		<div id='timebox'>
+            
+            <!--class="animate__animated animate__flash animate__slower animate__infinite	infinite "-->
+            <div id='clock'>
+			<div id="viewhour"></div><div class="animate__animated animate__flash animate__slower animate__infinite	infinite ">:</div><div id="viewminute"></div><div class="animate__animated animate__flash animate__slower animate__infinite	infinite ">:</div><div id="viewsecond"></div><br>
+			</div>
+			<div id='datea'>
+			<div id="viewdate"></div><div> | </div><div id="viewweekday"></div>
+			</div>
+
+		</div>
+		<script>
+		
+		function getWeek(x){
+		    if(x == 0)
+		        return '星期天';
+		    if(x == 1)
+		        return '星期一';
+		    if(x == 2)
+		        return '星期二';
+		    if(x == 3)
+		        return '星期三';
+		    if(x == 4)
+		        return '星期四';
+		    if(x == 5)
+		        return '星期五';
+		    if(x == 6)
+		        return '星期六';
+		}
+		
+			function taa(){
+				
+				var time1 = new Date();
+				
+				var hour = time1.getHours();
+				
+				if(hour<10)hour = '0'+time1.getHours();
+				
+				var minute = time1.getMinutes();
+				
+				if(minute<10)minute = '0'+time1.getMinutes();
+				
+				var second = time1.getSeconds();
+				
+				if(second<10)second = '0'+time1.getSeconds();
+				
+				//var contents = hour + '<span class="animate__animated animate__flash animate__slower animate__infinite	infinite ">:</span>' + minute + '<span class="animate__animated animate__flash animate__slower animate__infinite	infinite ">:</span>' + second;
+				
+				//document.getElementById('viewcontent').innerHTML=contents;
+				
+				document.getElementById('viewhour').innerHTML=hour;
+				
+				document.getElementById('viewminute').innerHTML=minute;
+				
+				document.getElementById('viewsecond').innerHTML=second;
+				
+				var year = time1.getFullYear();
+				
+				var month = time1.getMonth()+1;
+				
+				if(month < 10)
+				    month = '0'+ month;
+				
+				var day = time1.getDate();
+				
+				if(day < 10)
+				    day = '0'+ day;
+				
+				document.getElementById('viewdate').innerHTML=year + '/' + month + '/' +day ;
+				
+				var week = time1.getDay();
+				
+				document.getElementById('viewweekday').innerHTML=getWeek(week);
+				
+				
+				}
+			        setInterval(taa, 1000);
+		</script>
+
+		<script>
+			var urlParams;
+			(function () {
+			    var match,
+			        pl     = /\+/g,
+			        search = /([^&=]+)=?([^&]*)/g,
+			        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+			        query  = window.location.search.substring(1);
+			
+			    urlParams = {};
+			    while (match = search.exec(query))
+			       urlParams[decode(match[1])] = decode(match[2]);
+			})();
+			
+			var output1 = document.getElementById("clock");
+			if (urlParams["clock"]) output1.setAttribute("style", urlParams["clock"]);
+			
+			var output2 = document.getElementById("datea");
+			if (urlParams["date"]) output2.setAttribute("style", urlParams["date"]);
+			
+			if (urlParams["body"]) document.body.setAttribute("style", urlParams["body"]);
+		</script>
+	</body>
